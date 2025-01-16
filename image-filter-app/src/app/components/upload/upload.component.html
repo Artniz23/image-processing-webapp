@@ -1,1 +1,6 @@
-<p>upload works!</p>
+<div class="upload-container">
+  <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+  <button mat-raised-button color="primary" [disabled]="!selectedFile" (click)="uploadImage()">
+    Upload Image
+  </button>
+</div>

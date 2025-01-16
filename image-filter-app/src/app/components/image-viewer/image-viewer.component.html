@@ -1,1 +1,10 @@
-<p>image-viewer works!</p>
+<div class="image-viewer">
+  <div *ngIf="originalImage">
+    <h3>Original Image</h3>
+    <img [src]="originalImage" alt="Original Image" />
+  </div>
+  <div *ngIf="filteredImage">
+    <h3>Filtered Image</h3>
+    <img [src]="filteredImage" alt="Filtered Image" />
+  </div>
+</div>
