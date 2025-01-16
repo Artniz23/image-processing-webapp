@@ -1,3 +1,5 @@
-<app-upload></app-upload>
-<app-filter-selector (filterSelected)="onFilterSelected($event)"></app-filter-selector>
-<app-image-viewer [originalImage]="originalImage" [filteredImage]="filteredImage"></app-image-viewer>
+<div class="app">
+  <app-upload></app-upload>
+  <app-filter-selector (filterSelected)="onFilterSelected($event)"></app-filter-selector>
+  <app-image-viewer [originalImage]="originalImage" [filteredImage]="filteredImage"></app-image-viewer>
+</div>

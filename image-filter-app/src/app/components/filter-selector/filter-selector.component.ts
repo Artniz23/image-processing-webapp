@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
@@ -12,7 +12,8 @@ import {CommonModule} from "@angular/common";
     MatFormField,
     MatSelect,
     MatOption,
-    MatButton
+    MatButton,
+    MatLabel
   ],
   templateUrl: './filter-selector.component.html',
   styleUrl: './filter-selector.component.scss'
