@@ -2,6 +2,9 @@ from app.filters.filter_factory import FilterFactory
 from PIL import Image
 import io
 
+from app.models.dtos import SaveImageDTO
+
+
 class ImageService:
     def __init__(self, repository):
         self.repository = repository
@@ -25,9 +28,10 @@ class ImageService:
         return output.getvalue()
 
     def save_processed_image(self, filter_name: str, original_image: bytes, processed_image: bytes):
-        data = {
-            "filter_name": filter_name,
-            "original_image": original_image,
-            "processed_image": processed_image,
-        }
-        return self.repository.save_image(data)
+        save_image_dto = SaveImageDTO(
+            filter_name=filter_name,
+            original_image=original_image,
+            processed_image=processed_image
+        )
+
+        return self.repository.save_image(save_image_dto)

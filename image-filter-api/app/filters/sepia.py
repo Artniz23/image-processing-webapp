@@ -2,6 +2,8 @@ from PIL import Image
 
 
 class SepiaFilter:
+    description = "Apply a sepia tone to the image"
+
     def apply(self, image: Image.Image) -> Image.Image:
         # Преобразуем изображение в черно-белое
         grayscale = image.convert("L")
