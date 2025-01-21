@@ -11,6 +11,10 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+  getFilters(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/filters`);
+  }
+
   applyFilter(filterName: string, file: Blob): Observable<Blob> {
     const formData = new FormData();
     formData.append('filter_name', filterName);

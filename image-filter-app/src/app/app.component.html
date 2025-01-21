@@ -1,9 +1,15 @@
+@if (isLoading()) {
+  <div class="loader-overlay">
+    <mat-spinner></mat-spinner>
+  </div>
+}
+
 <div class="app">
   <app-upload class="app__upload" [class.uploaded]="originalImage" (uploaded)="onFileUploaded($event)" (deleted)="onDeletedFile()"></app-upload>
   @if (originalImage) {
     <app-image-viewer class="app__image-viewer" [originalImage]="originalImage" [filteredImage]="filteredImage"></app-image-viewer>
     <div class="app__filters">
-      <app-filter-selector class="app__filter" (filterSelected)="onFilterSelected($event)"></app-filter-selector>
+      <app-filter-selector class="app__filter" [filters]="availableFilters" (filterSelected)="onFilterSelected($event)"></app-filter-selector>
       @if (filteredFile) {
         <div class="app__controls">
           <button mat-raised-button color="primary" type="button" (click)="saveImage()">

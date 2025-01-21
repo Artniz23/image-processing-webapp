@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
@@ -19,7 +19,7 @@ import {CommonModule} from "@angular/common";
   styleUrl: './filter-selector.component.scss'
 })
 export class FilterSelectorComponent {
-  filters = ['grayscale', 'sepia', 'blur'];
+  @Input() filters: any[] = [];
   selectedFilter: string | null = null;
 
   @Output() filterSelected = new EventEmitter<string>();

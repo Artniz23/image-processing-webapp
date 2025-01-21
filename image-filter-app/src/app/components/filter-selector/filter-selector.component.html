@@ -2,8 +2,8 @@
   <mat-form-field>
     <mat-label>Выберите Фильтр</mat-label>
     <mat-select [(value)]="selectedFilter">
-      <mat-option *ngFor="let filter of filters" [value]="filter">
-        {{ filter }}
+      <mat-option *ngFor="let filter of filters" [value]="filter.name">
+        {{ filter.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
