@@ -1,6 +1,18 @@
-<div class="upload-container">
-  <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-  <button mat-raised-button color="primary" [disabled]="!selectedFile" (click)="uploadImage()">
-    Upload Image
-  </button>
+<div class="upload-container"
+     [class.drag-over]="isDragOver"
+     (dragover)="onDragOver($event)"
+     (dragleave)="onDragLeave()"
+     (drop)="onFileDrop($event)">
+  @if (!uploadedFile) {
+    <div class="upload-container__placeholder">
+      <p>Перетащите файл сюда или</p>
+      <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">Выберите файл</button>
+      <input #fileInput type="file" (change)="onFileSelect($event)" hidden/>
+    </div>
+  } @else {
+    <div class="upload-container__file-info">
+      <p><strong>Загружен файл:</strong> {{ uploadedFile.name }}</p>
+      <button mat-raised-button color="primary" type="button" class="remove-btn" (click)="removeFile()">Удалить</button>
+    </div>
+  }
 </div>

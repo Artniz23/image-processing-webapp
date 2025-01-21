@@ -1,13 +1,13 @@
 <div class="filter-selector">
   <mat-form-field>
-    <mat-label>Select Filter</mat-label>
+    <mat-label>Выберите Фильтр</mat-label>
     <mat-select [(value)]="selectedFilter">
       <mat-option *ngFor="let filter of filters" [value]="filter">
         {{ filter }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button color="accent" (click)="applyFilter()" [disabled]="!selectedFilter">
-    Apply Filter
+  <button mat-raised-button color="primary" type="button" (click)="applyFilter()" [disabled]="!selectedFilter">
+    Преобразовать изображение
   </button>
 </div>

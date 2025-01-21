@@ -19,7 +19,7 @@ import {CommonModule} from "@angular/common";
   styleUrl: './filter-selector.component.scss'
 })
 export class FilterSelectorComponent {
-  filters = ['grayscale', 'sepia', 'blur', 'invert'];
+  filters = ['grayscale', 'sepia', 'blur'];
   selectedFilter: string | null = null;
 
   @Output() filterSelected = new EventEmitter<string>();

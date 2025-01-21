@@ -6,21 +6,24 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8000';
+  private apiUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) {
   }
 
-  uploadImage(file: File): Observable<any> {
+  applyFilter(filterName: string, file: Blob): Observable<Blob> {
     const formData = new FormData();
+    formData.append('filter_name', filterName);
     formData.append('file', file);
-    return this.http.post(`${this.apiUrl}/upload`, formData);
+    return this.http.post(`${this.apiUrl}/process`, formData, {responseType: 'blob'});
   }
 
-  applyFilter(filterName: string, file: File): Observable<Blob> {
+  saveImage(filterName: string, original_image: Blob, processedImage: Blob): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('filter', filterName);
-    return this.http.post(`${this.apiUrl}/apply_filter`, formData, {responseType: 'blob'});
+    formData.append('filter_name', filterName);
+    formData.append('original_image_file', original_image);
+    formData.append('processed_image_file', processedImage);
+
+    return this.http.post(`${this.apiUrl}/save`, formData);
   }
 }

@@ -1,5 +1,19 @@
 <div class="app">
-  <app-upload></app-upload>
-  <app-filter-selector (filterSelected)="onFilterSelected($event)"></app-filter-selector>
-  <app-image-viewer [originalImage]="originalImage" [filteredImage]="filteredImage"></app-image-viewer>
+  <app-upload class="app__upload" [class.uploaded]="originalImage" (uploaded)="onFileUploaded($event)" (deleted)="onDeletedFile()"></app-upload>
+  @if (originalImage) {
+    <app-image-viewer class="app__image-viewer" [originalImage]="originalImage" [filteredImage]="filteredImage"></app-image-viewer>
+    <div class="app__filters">
+      <app-filter-selector class="app__filter" (filterSelected)="onFilterSelected($event)"></app-filter-selector>
+      @if (filteredFile) {
+        <div class="app__controls">
+          <button mat-raised-button color="primary" type="button" (click)="saveImage()">
+            Сохранить изображение
+          </button>
+          <button mat-raised-button color="primary" type="button" (click)="downloadImage()">
+            Скачать изображение
+          </button>
+        </div>
+      }
+    </div>
+  }
 </div>

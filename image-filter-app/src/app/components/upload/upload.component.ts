@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-upload',
@@ -12,23 +11,49 @@ import {ApiService} from "../../services/api.service";
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
-  selectedFile: File | null = null;
+  isDragOver: boolean = false;
+  uploadedFile: File | null = null;
 
-  constructor(private apiService: ApiService) {
+  @Output() uploaded = new EventEmitter<File>;
+
+  @Output() deleted = new EventEmitter<void>();
+
+  // При перетаскивании файла в зону
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = true;
   }
 
-  onFileSelected(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    if (target.files) {
-      this.selectedFile = target.files[0];
+  // Когда файл покидает зону
+  onDragLeave(): void {
+    this.isDragOver = false;
+  }
+
+  // Когда файл сбрасывают в зону
+  onFileDrop(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = false;
+
+    if (event.dataTransfer?.files.length) {
+      this.uploadedFile = event.dataTransfer.files[0];
+      this.uploaded.emit(this.uploadedFile);
     }
   }
 
-  uploadImage(): void {
-    if (this.selectedFile) {
-      this.apiService.uploadImage(this.selectedFile).subscribe((response) => {
-        console.log('Image uploaded successfully:', response);
-      });
+  // Когда файл выбирают через диалог
+  onFileSelect(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.uploadedFile = input.files[0];
+      this.uploaded.emit(this.uploadedFile);
     }
+  }
+
+  // Удалить выбранный файл
+  removeFile(): void {
+    this.uploadedFile = null;
+    this.deleted.emit();
   }
 }

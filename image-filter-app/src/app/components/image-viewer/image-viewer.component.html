@@ -1,10 +1,14 @@
 <div class="image-viewer">
-  <div *ngIf="originalImage">
-    <h3>Original Image</h3>
-    <img [src]="originalImage" alt="Original Image" />
-  </div>
-  <div *ngIf="filteredImage">
-    <h3>Filtered Image</h3>
-    <img [src]="filteredImage" alt="Filtered Image" />
-  </div>
+  @if (originalImage) {
+    <div class="image-viewer__image">
+      <h3>Оригинальное</h3>
+      <img [src]="originalImage" alt="Original Image"/>
+    </div>
+  }
+  @if (filteredImage) {
+    <div class="image-viewer__image">
+      <h3>Обработанное</h3>
+      <img [src]="filteredImage" alt="Filtered Image"/>
+    </div>
+  }
 </div>
