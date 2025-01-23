@@ -17,7 +17,7 @@ def test_process_image(service):
 
     with open(file_path, "rb") as file:
         image = file.read()
-    processed_image = service.process_image("grayscale", image)
+    processed_image = service.process_image("grayscale", image, "image/jpeg")
     assert processed_image is not None
     assert isinstance(processed_image, bytes)
 
@@ -32,7 +32,7 @@ def test_process_image_with_invalid_filter_name(service):
     with open(file_path, "rb") as file:
         image = file.read()
     with pytest.raises(ValueError):
-        service.process_image("not_valid_filter", image)
+        service.process_image("not_valid_filter", image, "image/jpeg")
 
 def test_save_processed_image(service):
     """

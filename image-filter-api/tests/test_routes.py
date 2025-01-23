@@ -49,7 +49,7 @@ def test_process_image(client, mocker):
     assert response.status_code == status.HTTP_200_OK
     assert response.content == fake_processed_image
     assert response.headers["content-type"] == mime_type
-    mock_service.assert_called_once_with(filter_name, fake_image)
+    mock_service.assert_called_once_with(filter_name, fake_image, mime_type)
 
 
 # Тест для маршрута /save

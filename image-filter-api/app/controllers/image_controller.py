@@ -21,8 +21,8 @@ async def get_filters():
 async def process_image(filter_name: str = Form(...), file: UploadFile = File(...)):
     try:
         original_image = await file.read()
-        processed_image = service.process_image(filter_name, original_image)
-        return StreamingResponse(io.BytesIO(processed_image), media_type="image/jpeg")
+        processed_image = service.process_image(filter_name, original_image, file.content_type)
+        return StreamingResponse(io.BytesIO(processed_image), media_type=file.content_type)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
