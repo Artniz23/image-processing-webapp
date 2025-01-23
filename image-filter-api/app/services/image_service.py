@@ -22,6 +22,7 @@ class ImageService:
 
         # Сохранить изображение
         output = io.BytesIO()
+        # TODO Сделать адаптивный format
         filtered_image.save(output, format="JPEG")
         output.seek(0)
 

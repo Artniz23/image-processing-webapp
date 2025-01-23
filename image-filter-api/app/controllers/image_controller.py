@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, HTTPException, File, Form
 from fastapi.responses import StreamingResponse
 
+from app.core.db import get_collection
 from app.filters.filter_factory import FilterFactory
 from app.models.dtos import ProcessImageResponseDTO
 from app.services.image_service import ImageService
@@ -8,7 +9,7 @@ from app.repositories.image_repository import ImageRepository
 import io
 
 router = APIRouter()
-repository = ImageRepository()
+repository = ImageRepository(get_collection("images"))
 service = ImageService(repository)
 
 @router.get("/filters")

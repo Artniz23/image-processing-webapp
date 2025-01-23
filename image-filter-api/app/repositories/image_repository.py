@@ -1,12 +1,11 @@
 from pymongo.results import InsertOneResult
 
-from app.core.db import get_collection
 from app.models.dtos import SaveImageDTO
 
 
 class ImageRepository:
-    def __init__(self):
-        self.collection = get_collection("images")
+    def __init__(self, collection):
+        self.collection = collection
 
     def save_image(self, image: SaveImageDTO):
         result: InsertOneResult = self.collection.insert_one(image.model_dump())
